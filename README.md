@@ -76,10 +76,59 @@ Logo após, vá até a aba de **Tests** ao lado de **Pre-request Script** e exec
 ```
 postman.setGlobalVariable('postmanBDD', responseBody);
 ```
-### Resultado 
+**Resultado**
 ![img4](https://user-images.githubusercontent.com/8397519/40283956-424f2f5a-5c5d-11e8-9a9f-d9498826f165.png)
 
 Com isso, podemos seguir normalmente com os testes.
+
+**Aba de testes**
+
+Nessa aba, estão listados testes para checagem do nosso método que será criado por meio da URL concebida pela API.
+
+![img5](https://user-images.githubusercontent.com/8397519/40284091-cf418b2c-5c5f-11e8-9490-8518acff0c59.png)
+
+Podemos enxergar na primeira linha, uma chamada do BDD, basta apenas copiar e colar no topo do arquivo.
+
+*Exemplo 1*
+
+```
+describe("Checagem básica se está no formato JSON", ()=>{
+    it('Deve retornar uma resposta válida com HTTP 201', () => {
+    response.should.have.status(201);
+    response.should.be.json;
+    response.body.should.not.be.empty;
+  });
+});
+```
+O exemplo que vemos acima é listado nas primeiras linhas do arquivo de teste e ele nada mais é do que uma simples checagem. Como estamos trabalhando com o formato JSON, é importante checar se o que é retornado é o que é esperado como response.
+
+Ao criarmos um usuário, o output esperado é de um código **201 HTTP** via método POST. Por isso esperamos por um código 201. Esse padrão é observado para o padrão BDD.
+
+*Exemplo 2*
+
+Em seguida vemos outro describe, que é usado o pm. O pm vem de postman e ele nos permite fazer checagens por meio dos ***tests***, simplificando a vida e o trabalho para grandes quantidades de testes.
+
+```
+   pm.test("Contém o id proprietário no body da mensagem", function () {
+    pm.expect(pm.response.text()).to.include("ownId");
+   });
+   
+```
+Para criação de um usuário na API, existem os campos de **require** que são mostrados na referência. Para visualização, listei apenas dois, que pode representar bem o que é um usuário dentro do cenário.
+
+```
+ownId
+```
+
+É uma string com características **REQUIRED** que é o Id próprio do cliente. 
+Referência externa. Limite de caracteres: (65).
+
+```
+fullname
+```
+
+É também uma string com característica **REQUIRED** sendo o nome completo do cliente.
+Limite de caracteres: (90).
 
 
 
