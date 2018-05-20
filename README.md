@@ -1,11 +1,11 @@
 # MOIP API TESTE
 
-Este teste se destina aos endpoints pertencentes a API do Moip. Sendo reduzidos em escopo para Clientes, Pedidos e Pagamentos.
+Este teste se destina aos endpoints pertencentes a API do Moip, sendo reduzidos em escopo para Clientes, Pedidos e Pagamentos.
 
 ## Introdução
 
-Para a execução dos cenários de testes, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados e se tornarem automatizados.
-A solução para a realização dos testes, se deu com o uso do Postman. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características.
+Para a execução dos cenários de teste, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados e se tornarem automatizados.
+A solução para a realização, se deu com o uso do Postman. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características.
 
 ### Pre requisitos
 
