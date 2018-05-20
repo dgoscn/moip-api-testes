@@ -76,6 +76,9 @@ Logo após, vá até a aba de **Tests** ao lado de **Pre-request Script** e exec
 ```
 postman.setGlobalVariable('postmanBDD', responseBody);
 ```
+### Resultado 
+![img4](https://user-images.githubusercontent.com/8397519/40283956-424f2f5a-5c5d-11e8-9a9f-d9498826f165.png)
+
 Com isso, podemos seguir normalmente com os testes.
 
 
