@@ -1,19 +1,22 @@
-# Project Title
+# MOIP API TESTE
 
-One Paragraph of project description goes here
+Este teste se destina aos endpoints pertencentes a API do Moip. Sendo reduzidos em escopo para Clientes, Pedidos e Pagamentos.
 
-## Getting Started
+## Introdução
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Para a execução dos cenparios de testes, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados para se tornarem automatizados. A solução para a realização dos testes, se deu com o uso do Postman. Um software gratuito, que pode ser usado para testes de desenvolvimento de API e outros.
 
-### Prerequisites
+### Pre requisitos
 
-What things you need to install the software and how to install them
+Para a execução do ambiente, é necessário que você possua instalado o Postman em sua máquina, como também a plataforma de Sandbox da Moip.
 
 ```
-Give examples
+Download Postman via https://www.getpostman.com/apps
 ```
 
+```
+Crie sua conta sandbox moip via https://conta-sandbox.moip.com.br/
+```
 ### Installing
 
 A step by step series of examples that tell you have to get a development env running
