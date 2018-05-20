@@ -4,12 +4,12 @@ Este teste se destina aos endpoints pertencentes a API do Moip, sendo reduzidos 
 
 ## Introdução
 
-Para a execução dos cenários de teste, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados e se tornarem automatizados.
-A solução para a realização, se deu com o uso do Postman. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características.
+Para a execução dos cenários, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados e se tornarem automatizados.
+A solução para a realização, se deu com o uso do Postman. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características. O Postman é um software teoricamente simples, mas bastante poderoso, e é por meio dele que poderemos checar os testes.
 
-### Pre requisitos
+### Pré requisitos
 
-Para a execução do ambiente, é necessário que você possua instalado o Postman em sua máquina, como também a criação de uma conta na plataforma de Sandbox da Moip.
+Para a execução do ambiente, é necessário que você possua instalado o Postman em sua máquina, como também possua uma conta na plataforma de Sandbox da Moip.
 
 ```
 Download Postman via https://www.getpostman.com/apps
@@ -18,15 +18,19 @@ Download Postman via https://www.getpostman.com/apps
 ```
 Crie sua conta sandbox moip via https://conta-sandbox.moip.com.br/
 ```
+
 ### Iniciando
 
-Uma vez que foram executados os passos acima, é necessário que seja compreendido o funcionamento da API. Com isso,é disponibilizado uma referência para melhor entendimento.
+Uma vez que foram executados os passos acima, é necessário que seja compreendido o funcionamento da API. Com isso, é disponibilizado uma referência para melhor entendimento.
 
 ```
 https://dev.moip.com.br/v2.0/reference
 ```
-Uma vez tendo compreendido, faça com que o entedimento de Autenticação esteja claro, pois é necessário o uso de Token e Chaves para conexão com a API. 
-Assumindo isso, ao abrirmos o Postman, teremos o seguinte ambiente:
+Visto isso, faça com que o entedimento de Autenticação esteja claro, pois é necessário o uso de Token e Chaves para conexão com a API. 
+Assumindo o passo anterior, ao abrirmos o Postman, teremos o seguinte ambiente:
+
+
+
 
 And repeat
 
