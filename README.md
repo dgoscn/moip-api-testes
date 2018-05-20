@@ -186,13 +186,45 @@ Logo abaixo do botão **SEND** vemos o status da nossa requisição, sendo demon
 
 **Observação**
 
-Até agora, toda a bateria de testes, se deu por meio de um cenário ideal, onde tudo é controlado e tentando replicar o que acontece de fato no dia a dia para se todos os passos forem executados corretamente. Porém, o próximo passo, iremos checar o seguinte cenário.
+Até agora, toda a bateria de testes se deu por meio de um cenário ideal, onde tudo é controlado e tentado a replicar o que acontece de fato no dia a dia para que todos os passos sejam executados corretamente. Porém, o próximo passo, iremos checar o seguinte cenário.
 
 1. Será repetido o mesmo método, sem nenhuma alteração. 
 2. Será obtido resultados diferentes com características parecidas ao do exemplo acima.
 3. Propor uma possível melhoria para melhor resposta para o usuário no campo de Status do **HTTP CODE**.
 
+**Executando o método GET novamente**
 
+O método GET fora executado novamente com os mesmos parâmetros. O ato de repetir a cena, se dá porque no dia a dia, é entendível que quem usa a API do Moip, lida com vários tipos de clientes com vários tipos de conexões. 
+Ex: "Está sendo criado um cliente e por algum erro na conexão ou falha na mesma, o usuário clica mais de uma vez em um botão de cadastro, sendo que o formulário já foi enviado, e pode ser retornado um *400 BAad Request* para o usuário sem demais especificações."
+O que pode ser explorado, aqui, seria a aplicação de renderização de página para usuário, o mostrando que ele é o responsável pela causa da falha e listando por meio de checagem de campos preenchidos, dizer ao mesmo qual campo ele preencheu ou não preencheu para gerar o erro.
+
+Abaixo segue só para fins de observação o output do cenário citado acima.
+
+![img10](https://user-images.githubusercontent.com/8397519/40285090-5e0e9a80-5c6e-11e8-89e7-a5a03af31681.png)
+
+Vemos que o body é diferente do output de quando o usuário é criado. É claro para o tester and desenvolvedor o erro, mas isso não demonstrado muita das vezes de maneira clara para o usuário qual o fator gerador do error.
+
+![img09](https://user-images.githubusercontent.com/8397519/40285106-980e2c32-5c6e-11e8-8907-769b2ad0d3b5.png)
+
+Os dois primeiros *FAILS* são claros de ser entendidos, pois não vindo o campo esperado como também a maneira que o format JSON é gerado, gera dúvida para o response do javascript.
+
+Vemos que o envio do OK falhou, logo o teste foi reprovado, mostrando o que esperávamos. 
+
+E por fim, o error 4xx não consegue ser retornado ao usuário. Porém, só basta acrescentar um 400 entre []. Mas para fim de aprendizado, ele pode ser mostrado como exemplo. 
+
+E vemos os **"Passeds"** batendo justamente com o que é esperado para os testes escritos no programa.
+
+![img11](https://user-images.githubusercontent.com/8397519/40285146-42c45c50-5c6f-11e8-836a-e1669599bdb0.png)
+
+```PASS``` Vemos que o pass para Id é estranho, pois ele checa a string retornada para um identificador de "path"
+
+```PASS 2``` Retornou um erro, o teste foi ativado
+
+```PASS 3 ``` O HTTP 201 code não retornou. Correto
+
+```PASS 4 ``` Retornou um erro por parte do cliente. Nesse campo, se visto em comparação com o último FAIL, é dado pelo simples erro de sintax, mas que pode passar sem ser visto por alguns QA do time. Porém ele retorna como esperado. Correto.
+
+### Adicionando Cartão de Crédito 
 
 
 
