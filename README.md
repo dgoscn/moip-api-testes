@@ -5,7 +5,7 @@ Este teste se destina aos endpoints pertencentes a API do Moip, sendo reduzidos 
 ## Introdução
 
 Para a execução dos cenários, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados e se tornarem automatizados.
-A solução para a realização, se deu com o uso do Postman. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características. O Postman é um software teoricamente simples, mas bastante poderoso, e é por meio dele que poderemos checar os testes.
+A solução para a realização, se deu com o uso do **Postman**. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características. O Postman é um software teoricamente simples, mas bastante poderoso, e é por meio dele que poderemos checar os testes.
 
 ### Pré requisitos
 
@@ -31,13 +31,38 @@ Assumindo o passo anterior, ao abrirmos o Postman, teremos o seguinte ambiente:
 
 ![img1](https://user-images.githubusercontent.com/8397519/40283585-e9a01244-5c56-11e8-9191-f97b640fdd7d.png)
 
+Reforçando, veja que meu Username é meu token enquanto que a senha, é minha chave. 
 
+### Overview
 
-And repeat
+Nas seguintes imagens, comentarei simples campos que são preenchidos com maiores detalhes.
 
 ```
-until finished
+Body
 ```
+![img2](https://user-images.githubusercontent.com/8397519/40283656-11299122-5c58-11e8-9ac9-27772954fe5d.png)
+
+No campo acima, estou criando um usuário simples, baseado nas mandatórias da API para testes. Isso inclui responses envolvendo json e códigos HTTP.
+*O Content-Type está setado como também o application/json para execução.*
+
+```
+Pre-request Script
+```
+![img3](https://user-images.githubusercontent.com/8397519/40283706-eda64906-5c58-11e8-96a7-072f3bdce0c8.png)
+
+**Pre-request Script*** são pedaços de códigos que são executados antes de um request. 
+Como será utilizado uma feature do Postman, o **Postman BDD**, é necessário definir o código acima para execução. 
+
+**Postman Behavior Driven Development (Postman BDD)**
+
+O Postman BDD permite usar a sintaxe do BDD para estruturar os testes e usar a sintax que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona.
+
+```
+it(‘should be a 200 response’, () => {
+ response.should.have.status(200);                           
+});
+```
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
