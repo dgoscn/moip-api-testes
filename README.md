@@ -133,14 +133,15 @@ Limite de caracteres: (90).
 *Exemplo 3*
 
 ```
-	"it('should be an error response', () => {",
-									"    response.ok.should.be.false;            // 2XX",
-									"    response.error.should.be.true;          // 4XX or 5XX",
-									"    response.clientError.should.be.true;    // 4XX",
-									"    response.serverError.should.be.false;   // 5XX",
-									"    response.should.have.status(404);",
-									"    response.statusType.should.equal(4);",
+"it('should be an error response', () => {",
+ "    response.ok.should.be.false;            // 2XX",
+ "    response.error.should.be.true;          // 4XX or 5XX",
+ "    response.clientError.should.be.true;    // 4XX",
+ "    response.serverError.should.be.false;   // 5XX",
+ "    response.should.have.status(404);",
+"    response.statusType.should.equal(4);",
 "});",
+
 ```
 O exemplo acima, nos mostra de maneira clara o que é que deve retornar como error tanto por parte do usuário quanto por parte do server. Com os responses dados, podemos checar por errors 4xx gerados pelo lado do cliente, 5xx gerados pelo lado do servidor e 2xx para resultados executados por meio dos métodos, ex 201 e 200.
 *Se houver dúvidas, para cada descrição de teste, existe uma explicação e está dividida pra evitar dificuldades de leitura"
@@ -157,9 +158,12 @@ Abaixo, faço a execução do método **POST** para criação do cliente na **AP
 Logo abaixo do botão **SEND** vemos o status da nossa requisição, sendo demonstradao como ``` Status 201 Created ```.
 É nos mostrado que o nosso cliente foi cadastrado com sucesso e **4** testes passaram na nossa bateria. Vemos que são **4/10** o que pode soar estranho para algunns. Porém, os testes que passam, são exatamente os que importam para nós.
 
-``PASS`` "Contém o id proprietário no body da mensagem". Vemos que o ownId fora preenchido.  heavy_check_mark
-```PASS``` "Contém o nome no body da mensagem". Representado pelo nosso fullname. Mais uma vez, é o que esperávamos.  heavy_check_mark
+``PASS`` "Contém o id proprietário no body da mensagem". Vemos que o ownId fora preenchido.  
+
+```PASS``` "Contém o nome no body da mensagem". Representado pelo nosso fullname. Mais uma vez, é o que esperávamos.  :heavy_check_mark
+
 ```PASS``` Checagem do formato JSON, vemos que funcionou.  heavy_check_mark
+
 ``PASS`` Além do 201, vemos que um OK também é enviado. heavy_check_mark
 
 
