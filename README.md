@@ -51,7 +51,7 @@ Pre-request Script
 ```
 ![img3](https://user-images.githubusercontent.com/8397519/40283706-eda64906-5c58-11e8-96a7-072f3bdce0c8.png)
 
-**Pre-request Script*** são pedaços de códigos que são executados antes de um request. 
+**Pre-request Script** são pedaços de códigos que são executados antes de um request. 
 Como será utilizado uma feature do Postman, o **Postman BDD**, é necessário definir o código acima para execução. 
 
 **Postman Behavior Driven Development (Postman BDD)**
@@ -64,6 +64,21 @@ it(‘should be a 200 response’, () => {
 });
 ```
 Checa se o response executado por um método GET, POST, DELETE, etc é a mensagem HTTP 200, Successful Request. 
+
+**Aplicando o BDD**
+
+Para o evitar de problemas, abra uma nova aba no postman, dentro de sua collection e execute o método **GET** no link a seguir:
+```
+http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js
+```
+Logo após, vá até a aba de **Tests** ao lado de **Pre-request Script** e execute o seguinte comando:
+
+```
+postman.setGlobalVariable('postmanBDD', responseBody);
+```
+Com isso, podemos seguir normalmente com os testes.
+
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
