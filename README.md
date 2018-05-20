@@ -29,6 +29,7 @@ https://dev.moip.com.br/v2.0/reference
 Visto isso, faça com que o entedimento de Autenticação esteja claro, pois é necessário o uso de Token e Chaves para conexão com a API. 
 Assumindo o passo anterior, ao abrirmos o Postman, teremos o seguinte ambiente:
 
+![img1](https://user-images.githubusercontent.com/8397519/40283585-e9a01244-5c56-11e8-9191-f97b640fdd7d.png)
 
 
 
