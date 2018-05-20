@@ -1,11 +1,11 @@
 # MOIP API TESTE
 
-Este teste se destina aos endpoints pertencentes a API do Moip, sendo reduzidos em escopo para Clientes, Pedidos e Pagamentos.
+Esse teste se destina aos endpoints pertencentes a API do Moip, sendo reduzidos em escopo para Clientes, Pedidos e Pagamentos.
 
 ## Introdução
 
 Para a execução dos cenários, foram realizados testes manuais, porém, os arquivos estão próximos de serem alterados e se tornarem automatizados.
-A solução para a realização, se deu com o uso do **Postman**. Um software gratuito, que pode ser usado para desenvolvimento de API e outras características. O Postman é um software teoricamente simples, mas bastante poderoso, e é por meio dele que poderemos checar os testes.
+A solução para a realização, se deu com o uso do **Postman**, um software gratuito, que pode ser usado para desenvolvimento de API e outras características. O Postman é um software teoricamente simples, mas bastante poderoso, e é por meio dele que poderemos checar os testes.
 
 ### Pré requisitos
 
@@ -43,6 +43,7 @@ Body
 ![img2](https://user-images.githubusercontent.com/8397519/40283656-11299122-5c58-11e8-9ac9-27772954fe5d.png)
 
 No campo acima, estou criando um usuário simples, baseado nas mandatórias da API para testes. Isso inclui responses envolvendo json e códigos HTTP.
+
 *O Content-Type está setado como também o application/json para execução.*
 
 ```
@@ -55,14 +56,14 @@ Como será utilizado uma feature do Postman, o **Postman BDD**, é necessário d
 
 **Postman Behavior Driven Development (Postman BDD)**
 
-O Postman BDD permite usar a sintaxe do BDD para estruturar os testes e usar a sintax que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona.
+O Postman BDD permite usar a sintaxe do BDD para estruturar os testes e usar a sintax que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona:
 
 ```
 it(‘should be a 200 response’, () => {
  response.should.have.status(200);                           
 });
 ```
-
+Checa se o response executado por um método GET, POST, DELETE, etc é a mensagem HTTP 200, Successful Request. 
 
 End with an example of getting some data out of the system or using it for a little demo
 
