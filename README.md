@@ -204,7 +204,7 @@ Abaixo segue só para fins de observação o output do cenário citado acima.
 
 Vemos que o body é diferente do output de quando o usuário é criado. É claro para o tester and desenvolvedor o erro, mas isso não demonstrado muita das vezes de maneira clara para o usuário qual o fator gerador do error.
 
-![img09](https://user-images.githubusercontent.com/8397519/40285106-980e2c32-5c6e-11e8-8907-769b2ad0d3b5.png)
+![img9](https://user-images.githubusercontent.com/8397519/40285200-efc5fcc4-5c6f-11e8-8f17-f06c23e69db7.png)
 
 Os dois primeiros *FAILS* são claros de ser entendidos, pois não vindo o campo esperado como também a maneira que o format JSON é gerado, gera dúvida para o response do javascript.
 
