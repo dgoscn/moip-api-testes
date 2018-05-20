@@ -155,18 +155,34 @@ Abaixo, faço a execução do método **POST** para criação do cliente na **AP
 
 ![img7](https://user-images.githubusercontent.com/8397519/40284510-98746dc4-5c66-11e8-9a8a-5cead6c3b7e4.png)
 
+**Checando o Passed**
+
 Logo abaixo do botão **SEND** vemos o status da nossa requisição, sendo demonstradao como ``` Status 201 Created ```.
 É nos mostrado que o nosso cliente foi cadastrado com sucesso e **4** testes passaram na nossa bateria. Vemos que são **4/10** o que pode soar estranho para algunns. Porém, os testes que passam, são exatamente os que importam para nós.
 
 ``PASS`` "Contém o id proprietário no body da mensagem". Vemos que o ownId fora preenchido.  
 
-```PASS``` "Contém o nome no body da mensagem". Representado pelo nosso fullname. Mais uma vez, é o que esperávamos.  :heavy_check_mark
+```PASS``` "Contém o nome no body da mensagem". Representado pelo nosso fullname. Mais uma vez, é o que esperávamos.  
 
-```PASS``` Checagem do formato JSON, vemos que funcionou.  heavy_check_mark
+```PASS``` Checagem do formato JSON, vemos que funcionou.  
 
-``PASS`` Além do 201, vemos que um OK também é enviado. heavy_check_mark
+``PASS`` Além do 201, vemos que um OK também é enviado. 
 
+**Checando o Failed**
 
+![img8](https://user-images.githubusercontent.com/8397519/40284682-3d4cf81e-5c69-11e8-97cd-8205435736f7.png)
+
+``` FAIL 2 ``` Nesse *Fail* vemos que ele retorna quando encontra algum, como não aconteceu, ele foi reprovado no teste.
+
+``` FAIL 3 ``` Como o nosso *201 HTTP CODE* retornou, o teste de não passar, foi reprovado. 
+
+``` FAIL 5 ``` Também não houve error por parte do servidor na nossa requisição, esse teste foi reprovado.
+
+``` FAIL 6 ``` Não houve por parte do cliente um erro notório, não aconteceu um 4xx, logo, foi reprovado.
+
+``` FAIL 7 ``` Praticamente um sinônimo do *FAIL 5*
+
+``` FAIL 8 ``` Equivalente ao FAIL 6, não retornando error 4xx, 404.
 
 
 End with an example of getting some data out of the system or using it for a little demo
