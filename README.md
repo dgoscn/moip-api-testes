@@ -184,6 +184,21 @@ Logo abaixo do botão **SEND** vemos o status da nossa requisição, sendo demon
 
 ``` FAIL 8 ``` Equivalente ao FAIL 6, não retornando error 4xx, 404.
 
+**Observação**
+
+Até agora, toda a bateria de testes, se deu por meio de um cenário ideal, onde tudo é controlado e tentando replicar o que acontece de fato no dia a dia para se todos os passos forem executados corretamente. Porém, o próximo passo, iremos checar o seguinte cenário.
+
+1. Será repetido o mesmo método, sem nenhuma alteração. 
+2. Será obtido resultados diferentes com características parecidas ao do exemplo acima.
+3. Propor uma possível melhoria para melhor resposta para o usuário no campo de Status do **HTTP CODE**.
+
+
+
+
+
+
+
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
