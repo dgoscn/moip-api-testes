@@ -1,0 +1,774 @@
+{
+	"info": {
+		"_postman_id": "e1e29dc5-c982-4c89-8e97-ac0a35d44954",
+		"name": "Moip-cliente",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "criandocliente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b8121999-0cd9-4924-9bb4-044f38d4bf06",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "999e8fe3-1a64-4862-8019-f778cc41daee",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"//É possível checar se o formato retornado é um formato JSON ou um código HTTP 201 para criação",
+							"describe(\"Checagem básica se está no formato JSON\", ()=>{",
+							"    it('Deve retornar uma resposta válida com HTTP 201', () => {",
+							"    response.should.have.status(201);",
+							"    response.should.be.json;",
+							"    response.body.should.not.be.empty;",
+							"  });",
+							"  ",
+							"});",
+							"",
+							"//Abaixo, temos o describe para responses HTTP mais usados e úteis para o nosso cenário atual.",
+							"describe('Checando respostas HTTP básicas', ()=>{",
+							"   ",
+							"   //Id propritário da conta",
+							"   pm.test(\"Contém o id proprietário no body da mensagem\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ownId\");",
+							"   });",
+							"   ",
+							"   //Nome do usuário",
+							"   pm.test(\"Contém o nome no body da mensagem\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"fullname\");",
+							"   });",
+							"   ",
+							"  //Retorno de erros 4xx e 5xx",
+							"   it('Deve retornar quando qualquer error de resposta for válido', () => {",
+							"      response.should.be.json;",
+							"      response.error.should.be.true;            ",
+							"   }); ",
+							"   ",
+							"   //Mostrado quando um erro de código http 201 não vem como resposta",
+							"   it(\"Mostrado quando o HTTP 201 não retorna\", ()=> {",
+							"       response.should.be.json;",
+							"       response.should.not.have.status(201);",
+							"   });",
+							"   ",
+							"   //Quando uma requisição é feita e é enviado um OK como resposta independente se está errado ou correta.",
+							"   it(\"Envia um OK como resposta\", () => {",
+							"       response.should.be.json;",
+							"       response.ok.should.be.true;",
+							"   });",
+							"   ",
+							"   //Quando por exemplo algum erro tende a ser omitido para o usuário, ele é mostrado se acontecer.",
+							"   it(\"Retorna um erro de servidor\", ()=>{",
+							"       response.should.be.json;",
+							"       response.serverError.should.be.true;",
+							"   });",
+							"   ",
+							"   //Erro para 4xx",
+							"   it(\"Retorna um erro por parte do cliente\", ()=>{",
+							"       response.should.be.json;",
+							"       response.clientError.should.be.true;",
+							"   });",
+							"   ",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 5xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(5);",
+							"   });",
+							"   ",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 4xx status\", () => {",
+							"       response.should.be.json;",
+							"\t   response.should.have.status(404);",
+							"\t   response.statusType.should.equal(4);",
+							"    });",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"ownId\":\"ID08501-FALCAO\",\n   \"fullname\":\"Falcão Maia\",\n   \"email\":\"maiafalcao@email.com\",\n   \"birthDate\":\"1960-5-10\",\n   \"taxDocument\":{\n      \"type\":\"CPF\",\n      \"number\":\"20013390024\"\n   },\n   \"phone\":{\n      \"countryCode\":\"55\",\n      \"areaCode\":\"11\",\n      \"number\":\"22226842\"\n   },\n   \"shippingAddress\":{\n      \"city\":\"Pereiro\",\n      \"district\":\"Centro\",\n      \"street\":\"Avenida 3\",\n      \"streetNumber\":\"085\",\n      \"zipCode\":\"63460-000\",\n      \"state\":\"CE\",\n      \"country\":\"BRA\"\n   }\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/customers/",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"customers",
+						""
+					]
+				},
+				"description": "This is the initial part of creating a user using the API from Moip Reference.\nIt is simple for while, but the idea is to get more complex through the tests."
+			},
+			"response": []
+		},
+		{
+			"name": "obtendoclientes",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b12a5955-5dd3-4067-b426-66da4eee81f9",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e76c784-d607-47e3-9901-fcd1feeb6102",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe(\"Checagem básica de respostas\", ()=>{",
+							"    it('A resposta deve estar no formato JSON', () => {",
+							"        response.should.be.json; ",
+							"    }); ",
+							"});",
+							"",
+							"describe('Checando respostas HTTP básicas', ()=>{",
+							"   ",
+							"   it('should be an error response', () => {",
+							"      response.should.be.json;",
+							"      response.error.should.be.true;            //4XX OU 5XX ",
+							"   }); ",
+							"   ",
+							"   it(\"Retorna o código HTTP 200\", ()=> {",
+							"       response.should.be.json;",
+							"       response.should.have.status(200);",
+							"   });",
+							"   ",
+							"   it(\"Retorna uma resposta OK\", () => {",
+							"       response.should.be.json;",
+							"       response.ok.should.be.true;",
+							"   });",
+							"   ",
+							"   it(\"Não envia um OK como resposta\", () => {",
+							"       response.should.be.json;",
+							"       response.ok.should.be.false;",
+							"   });",
+							"   ",
+							"   it(\"Deve não retornar um erro de servidor\", ()=>{",
+							"       response.should.be.json;",
+							"       response.serverError.should.be.true;",
+							"   });",
+							"   ",
+							"    it(\"Deve não retornar um erro de cliente\", ()=>{",
+							"       response.should.be.json;",
+							"       response.clientError.should.be.true;",
+							"   });",
+							"   ",
+							"   it(\"Deve retornar um 5xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(5);",
+							"   });",
+							"    it(\"Deve retornar um 4xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(4);",
+							"   });",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n   \"ownId\":\"ID0841012-PAGADOR\",\n   \"fullname\":\"Pagador Dois Um\",\n   \"email\":\"pagadordoisum@email.com\",\n   \"birthDate\":\"1980-5-10\",\n   \"taxDocument\":{\n      \"type\":\"CPF\",\n      \"number\":\"10019390824\"\n   },\n   \"phone\":{\n      \"countryCode\":\"55\",\n      \"areaCode\":\"11\",\n      \"number\":\"22226172\"\n   },\n   \"shippingAddress\":{\n      \"city\":\"Pereiro\",\n      \"district\":\"Centro\",\n      \"street\":\"Avenida 3\",\n      \"streetNumber\":\"085\",\n      \"zipCode\":\"63460-000\",\n      \"state\":\"CE\",\n      \"country\":\"BRA\"\n   }\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/customers/",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"customers",
+						""
+					]
+				},
+				"description": "Creating users."
+			},
+			"response": []
+		},
+		{
+			"name": "using-bdd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "acb5cb7b-2b8e-4837-854b-73df088ba29e",
+						"type": "text/javascript",
+						"exec": [
+							"postman.setGlobalVariable('postmanBDD', responseBody);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+					"protocol": "http",
+					"host": [
+						"bigstickcarpet",
+						"com"
+					],
+					"path": [
+						"postman-bdd",
+						"dist",
+						"postman-bdd.min.js"
+					]
+				},
+				"description": "Here comes the script to execute BDD style postman on my tests runing for Moip"
+			},
+			"response": []
+		},
+		{
+			"name": "addcartaocredito",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f724ced1-ca96-4f44-bf2b-8a522451f87a",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0934eaf-e54b-44ca-8396-538754fbeeb8",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe('Recebe informações do cliente', () => {",
+							"",
+							"  it('Deve retornar uma resposta válida', () => {",
+							"    response.should.have.status(201);",
+							"    response.should.be.json;",
+							"    response.body.should.not.be.empty;",
+							"  });",
+							"  ",
+							"  //Nome do usuário",
+							"  pm.test(\"Contém o o método da compra do cartão\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"method\");",
+							"  });",
+							"  //Id do usuário",
+							"  pm.test(\"Contém a bandeira do cartão\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"brand\");",
+							"  });",
+							"  // Primeiros 6 dígitos do cartão",
+							"  pm.test(\"Contém os 6 primeiros números do cartão\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"first6\");",
+							"  });",
+							"  // Últimos 4 dígitos do cartão",
+							"  pm.test(\"Contém os 4 ultimos números do cartão\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"last4\");",
+							"  });",
+							"  ",
+							"   //Mostrado quando um erro de código http 201 não vem como resposta",
+							"   it(\"Mostrado quando o HTTP 201 não retorna\", ()=> {",
+							"       response.should.be.json;",
+							"       response.should.not.have.status(201);",
+							"   });",
+							"   ",
+							"   //Quando uma requisição é feita e é enviado um OK como resposta independente se está errado ou correta.",
+							"   it(\"Envia um OK como resposta\", () => {",
+							"       response.should.be.json;",
+							"       response.ok.should.be.true;",
+							"   });",
+							"   ",
+							"   //Quando por exemplo algum erro tende a ser omitido para o usuário, ele é mostrado se acontecer.",
+							"   it(\"Retorna um erro de servidor\", ()=>{",
+							"       response.should.be.json;",
+							"       response.serverError.should.be.true;",
+							"   });",
+							"   ",
+							"   //Erro para 4xx",
+							"   it(\"Retorna um erro por parte do cliente\", ()=>{",
+							"       response.should.be.json;",
+							"       response.clientError.should.be.true;",
+							"   });",
+							"   ",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 5xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(5);",
+							"   });",
+							"   ",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 4xx status\", () => {",
+							"       response.should.be.json;",
+							"\t   response.should.have.status(404);",
+							"\t   response.statusType.should.equal(4);",
+							"    });",
+							"});",
+							"",
+							"//Um erro que pode ser visto como 5xx, mas não é percebido pela API é o de que mesmo adicionando o mesmo cartão, ele é criado e enviado a mensagem 201. Onde poderia ser dito que nao pode ou perguntando se deseja sobrescrever.",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"method\": \"CREDIT_CARD\",\n  \"creditCard\": {\n    \"expirationMonth\": \"05\",\n    \"expirationYear\": \"18\",\n    \"number\": \"6062825624254001\",\n    \"cvc\": \"123\",\n    \"holder\": {\n      \"fullname\": \"Falcão Maia\",\n      \"birthdate\": \"1960-05-10\",\n      \"taxDocument\": {\n        \"type\": \"CPF\",\n        \"number\": \"10013390025\"\n      },\n      \"phone\": {\n        \"countryCode\": \"55\",\n        \"areaCode\": \"11\",\n        \"number\": \"55552266\"\n      }\n    }\n  }\n}\n\n\n\n"
+				},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/customers/CUS-TQO0IQ4TWU67/fundinginstruments",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"customers",
+						"CUS-TQO0IQ4TWU67",
+						"fundinginstruments"
+					]
+				},
+				"description": "Adding Credit Card to a User via Client Name/ID"
+			},
+			"response": []
+		},
+		{
+			"name": "consultartodosclientes",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2c546b0b-2257-438d-a4f9-bb0c2dc42f80",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3c46e05-1ad8-4013-a8a1-562cd74d01cf",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe('Recebe informações do cliente', () => {",
+							"",
+							"  //É possível checar se o formato é um formato json como também um código http",
+							"  it('Deve retornar uma resposta 200', () => {",
+							"    response.should.have.status(200);",
+							"    response.should.be.json;",
+							"    response.body.should.not.be.empty;",
+							"  });",
+							"  ",
+							"   //Nome do usuário",
+							"   pm.test(\"Contém o nome no body da mensagem\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"fullname\");",
+							"   });",
+							"  //Id do usuário",
+							"   pm.test(\"Contém o id no body da mensagem\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"id\");",
+							"   });",
+							"   //Id propritário da conta",
+							"   pm.test(\"Contém o id proprietário no body da mensagem\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ownId\");",
+							"   });",
+							" ",
+							"   //Quando uma requisição é feita e é enviado um OK como resposta",
+							"   it(\"Envia um OK como resposta\", () => {",
+							"       response.should.be.json;",
+							"       response.ok.should.be.true;",
+							"   });",
+							"",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 5xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(5);",
+							"   });",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 4xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(4);",
+							"   });",
+							"});",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/customer",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"customer"
+					]
+				},
+				"description": "This works for visit some client with given id."
+			},
+			"response": []
+		},
+		{
+			"name": "listarcliente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0bbef33c-63a5-4be5-8d17-db7580b5051d",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "59c3cfe3-b41b-486a-9802-cd59d6a1c04f",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe('Recebe informações do cliente', () => {",
+							"",
+							"  it('Deve retornar uma resposta válida', () => {",
+							"    response.should.have.status(200);",
+							"    response.should.be.json;",
+							"    response.body.should.not.be.empty;",
+							"  });",
+							"  ",
+							"     var jsonData = JSON.parse(responseBody);",
+							"    tests[\"User ID\" +jsonData.id] = jsonData.id === \"CUS-3P7EB7SQYKGL\";",
+							"",
+							"    var jsonData2 = JSON.parse(responseBody);",
+							"    tests[\"User ID\" +jsonData2.ownId] = jsonData2.ownId === \"ID0840-FALCAO\";",
+							"",
+							"    var jsonData3 = JSON.parse(responseBody);",
+							"    tests[\"User ID\" +jsonData3.fullname] = jsonData3.fullname === \"FALCAO BUENO\";",
+							"",
+							"   ",
+							"   it(\"Mostrado quando o HTTP 200 não retorna\", ()=> {",
+							"       response.should.not.have.status(200);",
+							"   });",
+							"   ",
+							"    it(\"Deve retornar o código HTTP 200\", ()=> {",
+							"       response.should.have.status(200);",
+							"   });",
+							"  ",
+							"   it(\"Deve retornar um 5xx status\", () => {",
+							"       response.statusType.should.equal(5);",
+							"   });",
+							"    it(\"Deve retornar um 4xx status\", () => {",
+							"       response.statusType.should.equal(4);",
+							"   });",
+							"});",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/customers/ID0840-FALCAO",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"customers",
+						"ID0840-FALCAO"
+					]
+				},
+				"description": "This query is simple. It is just made to call all clients that belongs to given account."
+			},
+			"response": []
+		},
+		{
+			"name": "deletarcartao",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ac43829c-9d6a-4d6c-9400-c0d5571ffa71",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "765df40c-de43-4373-b919-0010746200de",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe('Recebe informações do cliente', () => {",
+							"",
+							"  //É possível checar se o formato é um formato json como também um código http",
+							"    it(\"Mostrado quando o HTTP 200 Code occorre\", ()=> {",
+							"       response.should.have.status(200);",
+							"   });",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 5xx status\", () => {",
+							"       response.should.be.json;",
+							"       response.statusType.should.equal(5);",
+							"   });",
+							"   //Erros internos de 5xx são listados por meio do response a seguir",
+							"   it(\"Deve retornar um 4xx status\", () => {",
+							"       response.statusType.should.equal(4);",
+							"   });",
+							"});",
+							"",
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/fundinginstruments/CRC-TMLVMPDSMTID",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"fundinginstruments",
+						"CRC-TMLVMPDSMTID"
+					]
+				},
+				"description": "This focus just in delete a card linked to a user"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+				"type": "string"
+			}
+		]
+	}
+}
