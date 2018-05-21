@@ -226,11 +226,98 @@ E vemos os **"Passeds"** batendo justamente com o que é esperado para os testes
 
 ### Adicionando Cartão de Crédito 
 
+Mais uma vez, criaremos uma nova aba ou arquivo como prefira falar para dentro da nossa **collection**, da qual, estão separadas como arquivos: *Moip-cliente, Moip-pedidos, Moip-pgamentos*. 
+
+Para adicionar o cartão, a Moip disponibiliza um modelo claro e limpo de como adicionar a um determinado cliente. 
+Abaixo, eu listo qual o campo que uso e qual o arquivo JSON é injetado. 
+
+***Note que para fazer outra requisição, usaremos ainda o método POST com uma URL diferente, onde será passado o id do cliente, gerado quando criamos nosso cliente.***
+
+É disponibilizado também, alguns modelos de cartão para o cadastramento. Tudo isso na referência da API. Tendo isso em vista, passamos o ID do cliente, no meu caso, o criado anteriormente, foi ```CUS-TQO0IQ4TWU67```. Nos próximos passos, veremos como isso será possível de obter.
+
+![img12](https://user-images.githubusercontent.com/8397519/40285414-0adf7be6-5c72-11e8-8c8b-672cfa309719.png)
+
+O input JSON aplicado é identico ao oferecido pelo exemplo da API. Lembrando, utilize os cartões fictícios fornecidos pela referência. Tentei utilizar outros, obtive erros. 
+
+Chegamos assim, na parte de testes, que é o que importa para minha avaliação :) 
+
+*Os arquivos estão nas collections, se ficar difícil de visualizar, vá até cada uma delas e abra no Postman*
+
+![img13](https://user-images.githubusercontent.com/8397519/40285479-d5f58136-5c72-11e8-8fff-80dbae05af99.png)
+
+Os testes são bastante parecidos para o de criar, porém, tem o checar de alguns campos a mais, que são gerados pelo response do nosso metódo.  ***Lembrar de add o ID do usuário na URL do POST method***
+
+```
+//Nome do usuário
+  pm.test("Contém o o método da compra do cartão", function () {
+    pm.expect(pm.response.text()).to.include("method");
+  });
+  //Id do usuário
+  pm.test("Contém a bandeira do cartão", function () {
+    pm.expect(pm.response.text()).to.include("brand");
+  });
+  // Primeiros 6 dígitos do cartão
+  pm.test("Contém os 6 primeiros números do cartão", function () {
+    pm.expect(pm.response.text()).to.include("first6");
+  });
+  // Últimos 4 dígitos do cartão
+  pm.test("Contém os 4 ultimos números do cartão", function () {
+    pm.expect(pm.response.text()).to.include("last4");
+  });
+  
+ ```
+É adicionado dois testes e mudado os dois primeiros. Faço a checagem do método, que para o exemplo atual, retornará como **CREDIT_CARD**, como também a marca e os números referentes. Explorei somente esses campos, pois para os demais, basta executar *ctrl+c e ctrl+v*, como o intuito é demonstrar o conhecimento, me limitei a eles.
 
 
+**Executando**
 
+Quando executo o método **post** o seguinte output para o **body** é retornado.
 
+![img14](https://user-images.githubusercontent.com/8397519/40285563-f5a79e8c-5c73-11e8-95da-5db10a22328c.png)
 
+Em seguida, os testes que passaram, temos:
+
+**Checando o Passed**
+
+![img15](https://user-images.githubusercontent.com/8397519/40285575-1ebfe626-5c74-11e8-9318-7d08bca2ce6e.png)
+
+Vemos o *Status: 201 Created* mostrando que a criação do cartão para o cliente funcionou. Logo, podemos checar os "PASSes"
+
+```PASS``` Contém o o método da compra do cartão - Esperamos isso, OK.
+
+```PASS``` Contém a bandeira do cartão - Esperamos isso, OK.
+
+```PASS``` Contém os 6 primeiros números do cartão - Esperamos isso, OK.
+
+```PASS``` Contém os 4 ultimos números do cartão - Esperamos isso, OK.
+
+```PASS``` 1. Recebe informações do cliente - Deve retornar uma resposta válida - Vemos que fora retornada, OK.
+
+```PASS``` 3. Recebe informações do cliente - Envia um OK como resposta - Foi enviado o status, OK.
+
+Vemos por meio de testes simples, o que é retornado. Como solução ou melhoramento para os testes que passarão, não tenho nenhuma em mente, acredito que elas satisfazem o que é necessário para uma boa navegação do cliente.
+
+**Checando o Failed**
+
+![img16](https://user-images.githubusercontent.com/8397519/40285616-dfbfab36-5c74-11e8-9b8e-39d4ef798153.png)
+
+``` FAIL ``` 2. Vemos que o 201 retorna para o usuário, logo o não retornar dele, garante que o teste falhe - OK.
+
+``` FAIL ``` 4. Não aconteceu error por conta do servidor, logo é esperado o FAIL - OK.
+
+``` FAIL ``` 5. Nesse caso de criação, como ocorreu tudo bem, não aconteceu error 4xx. Logo é esperado o FAIL - OK.
+
+``` FAIL ``` 6. Nada de errors 5xx. Esperado o FAIL - OK.
+
+``` FAIL ``` 7. Análogo ao FAIL 5, porém, fora retornado um 201 - OK.
+
+***Análises***
+
+Casos.
+
+1. Se o usuário esquecer algum número do cartão.
+2. Se o usuário não colocar os determinados números do cvc.
+3. 
 
 End with an example of getting some data out of the system or using it for a little demo
 
