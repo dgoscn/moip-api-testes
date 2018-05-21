@@ -56,7 +56,7 @@ Como será utilizado uma feature do Postman, o **Postman BDD**, é necessário d
 
 **Postman Behavior Driven Development (Postman BDD)**
 
-O Postman BDD permite usar a sintaxe do BDD para estruturar os testes e usar a sintax que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona:
+O Postman BDD permite usar a sintaxe do BDD para estruturar os testes e usar a sintaxe que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona:
 
 ```
 it(‘should be a 200 response’, () => {
@@ -222,7 +222,7 @@ E vemos os **"Passeds"** batendo justamente com o que é esperado para os testes
 
 ```PASS 3 ``` O HTTP 201 code não retornou. Correto
 
-```PASS 4 ``` Retornou um erro por parte do cliente. Nesse campo, se visto em comparação com o último FAIL, é dado pelo simples erro de sintax, mas que pode passar sem ser visto por alguns QA do time. Porém ele retorna como esperado. Correto.
+```PASS 4 ``` Retornou um erro por parte do cliente. Nesse campo, se visto em comparação com o último FAIL, é dado pelo simples erro de sintaxe, mas que pode passar sem ser visto por alguns QA do time. Porém ele retorna como esperado. Correto.
 
 ### Adicionando Cartão de Crédito 
 
@@ -367,6 +367,107 @@ Quanto a melhoria, mesmo fazendo um novo método de **DELETE** para o mesmo **ID
 
 ![img26](https://user-images.githubusercontent.com/8397519/40286907-615d541c-5c80-11e8-926c-499fd4a33995.png)
  
+Quanto aos erros, é listado os já conhecidos e sendo retornado para o novo teste inserido, o erro que esperávamos.
+
+![img27](https://user-images.githubusercontent.com/8397519/40286948-a065728e-5c80-11e8-8ca4-d2a23722c030.png)
+
+### Consultando Clientes
+
+Os testes para a consulta de cliente, se dá de maneira fácil, via método de API, tanto que na **Sandbox do Moip**, é de fácil uso, sendo os testes bem simplórios. Mesmo utilizando o **Selenium IDE**, não encontrei erros satisfatórios para se por no relatório. Contudo, vou me manter no **Postman** e tentar explorar alguns pontos que não são vistos na **conta-sandbox.moip.com.br**. 
+
+A imagem abaixo, demonstra o ambiente da qual é usado para se obter a lista dos determinados clientes relacionados a conta criada. É dado pelo uso do método **GET**, o primeiro entre os nossos métodos utilizados até agora.
+
+![img29](https://user-images.githubusercontent.com/8397519/40287190-14e8c268-5c82-11e8-8d40-e1db688d436e.png)
+
+Os mesmos aspectos usados para testes, já foram usados antes, sendo que, a reposta que é devolvida nesse campo é diferente, e para fins de demonstração, me limito aos campos de ownId, fullname e id.
+
+Com os três campos citados, podemos checar os minímos detalhes que um usuário pode obter e retornar respostas esperadas. 
+
+Para não deixar passar sem explicar, cito os testes a seguir:
+
+```
+//Nome do usuário
+   pm.test("Contém o nome no body da mensagem", function () {
+    pm.expect(pm.response.text()).to.include("fullname");
+   });
+  //Id do usuário
+   pm.test("Contém o id no body da mensagem", function () {
+    pm.expect(pm.response.text()).to.include("id");
+   });
+   //Id propritário da conta
+   pm.test("Contém o id proprietário no body da mensagem", function () {
+    pm.expect(pm.response.text()).to.include("ownId");
+   });
+```
+
+No primeiro **pm** temos a checagem pelo campo do nome completo do Cliente, em seguida a checagem do Id, que é único para cada usuário e ownId, tendo as mesmas caractersticas. 
+
+Logo, obtemos a saida:
+
+![img30](https://user-images.githubusercontent.com/8397519/40287525-3321735e-5c84-11e8-899d-3dce775218d4.png)
+
+
+```PASS``` Vemos mais uma vez que o formato JSON é retornado contendo o nome do usuário - OK.
+
+```PASS``` Mesmas características da anterior sendo que para o Id - OK.
+
+```PASS``` E também para o Id proprietário - OK.
+
+```PASS 1 ``` Vemos que para o simples GET de usuário, é dado o **200 HTTP Code** 
+
+```PASS 2``` E o OK é retornado.
+
+Para os erros esperados, temos:
+
+![img31](https://user-images.githubusercontent.com/8397519/40287537-4995adc6-5c84-11e8-859c-0772c6e8e58e.png)
+ 
+```FAIL 3``` Nenhum retorno para erro de sistema, logo assim o FAIl é levantado.
+
+```FAIL 4``` Como não houve nenhum 4xx, o FAIL foi levantado. 
+
+Casos
+
+1. Se o usuário procurar https://sandbox.moip.com.br/v2/clientes
+2. Se o usuário procurar https://sandbox.moip.com.br/v2/customer
+
+As mesmas respostas são retornadas, não especificando o que há de errado na **URL**, isso para um usuário leigo, pode ser um problema, pois ele não verá que está acessando uma **URL** com algum pequeno erro de sintaxe. 
+
+``` { "ERROR" : "Ops... You are trying to access an invalid URL" } ``` isso é o que é retornado para. 
+
+Uma mensagem mais clara, baseada na rota que o usuário acessa, poderia melhorar a busca do mesmo. 
+
+### Consultando Um Cliente Específico 
+
+É análogo ao exemplo anterior, sendo que um parâmetro é adicionado a **URL** e alguns campos no **Test**.
+
+Fiz a busca a um cliente meu cadastrado na base. Como já sei o **id**, **ownId** e **fullname**, fiz a busca usando por parâmetro o preenchimento desses campos.
+
+Segue abaixo a imagem, ilustrando melhor o que fora explicado. 
+
+![img32](https://user-images.githubusercontent.com/8397519/40287786-2c100ca4-5c86-11e8-9ea5-74bc498e7bb8.png)
+
+Vale lembrar que possuo já o **ID** de busca na **URL** visto em exemplos anteriores. 
+
+Explicando o código, nada mas faço do que percorrer pelo **Body** e checar pelos campos que desejo encontrar se são válidos, uma vez que são válidos, vejo se eles batem com a **String** que eu possuo, uma vez que isso acontece, é me retornado o que eu espero.
+
+As demais linhas, possuem os testes de padrão, usados em toda a coleção.
+
+![img33](https://user-images.githubusercontent.com/8397519/40287838-91082b8c-5c86-11e8-9d58-22661cf2bc83.png)
+
+Os ```PASSES``` são bastante lúcidos, pois batem com os campos que foram inseridos no **Tests**
+
+Já quanto aos erros, são erros simples, retornado no output de listagem de usuários.
+
+![img34](https://user-images.githubusercontent.com/8397519/40287900-ec569528-5c86-11e8-9aa8-5a0cc4bd25b4.png)
+
+Casos
+
+1. Se um usuário buscar pelo **fullname** do usuário na **URL**, o que é retornado?
+2. Se um usuário buscar pelo **ownId** do usuário na **URL**, o que é retornado?
+
+Para os casos citados acima, um **JSON** é gerado no **Body** de testes e é demontrado que não existe determinada fonte para aquele usuário. A tratativa para um melhoramento disso, é que a implementação para busca com **ownId** e **fullname** possam ser aplicadas, pois se torna mais fácil. Visto também, que o erro de retorno, possa ser mais amigável, como: ``` O formato de busca é inválido para o campo``` ou redireciona para uma rota anterior da qual a busca está sendo feita.
+
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
