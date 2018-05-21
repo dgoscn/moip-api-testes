@@ -317,7 +317,32 @@ Casos.
 
 1. Se o usuário esquecer algum número do cartão.
 2. Se o usuário não colocar os determinados números do cvc.
-3. 
+3. Se o usuário digitar um número inválido de ano de expiração.
+
+Executei os seguintes casos com as determinadas operações. 
+
+![img19](https://user-images.githubusercontent.com/8397519/40285797-a230a82c-5c76-11e8-910e-197028e2d829.png)
+
+Se comparado ao *body* inicial do card, é visto que alterei dois valores no *campo de cartão*, o *número de expiração* do cartão e o deleção de um número do *cvc*. Logo, é gerado um erro de *Bad Request* Como vemos a seguir. 
+
+**Checando o Passed**
+![img20](https://user-images.githubusercontent.com/8397519/40285834-1dc3b092-5c77-11e8-8b83-88adc42b2c97.png)
+
+``` PASS``` 2. Vemos claramente que um 201 não é retornado, pois não há criação - OK.
+``` PASS``` 3. É retornado error para o usuário pois ocorre erro - OK.
+
+
+**Checando o Failed**
+
+![img21](https://user-images.githubusercontent.com/8397519/40285876-83e10348-5c77-11e8-91b7-5a6cc71cb6a3.png)
+
+Temos os 4 primeiros *FAILEDs* deixando claro que não é criado o cartão e não retorna os campos que seriam criados se o *post* tivesse acontecido com *201 http code*.
+
+Os últimos *FAILEDs* vemos que são erros esperados para um *Bad Request vindo do usuário*
+
+Mais uma vez, deixo como uma possível solução, um melhor redirecionamento de quando for usado a API do Moip, para que diga ao usuário qual campo ocorreu um error, como também, aconteça a validação de campos por meio de formulários, obrigando o usuário a preencher os campos obrigatórios e não deixando passar se houver um número errado, mostrando mais uma vez qual o campo isso acontece. 
+
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
