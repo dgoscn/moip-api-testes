@@ -19,7 +19,9 @@ Download Postman via https://www.getpostman.com/apps
 Crie sua conta sandbox moip via https://conta-sandbox.moip.com.br/
 ```
 
-### Iniciando
+## Iniciando
+
+### Criando Clientes
 
 Uma vez que foram executados os passos acima, é necessário que seja compreendido o funcionamento da API. Com isso, é disponibilizado uma referência para melhor entendimento.
 
@@ -81,7 +83,6 @@ postman.setGlobalVariable('postmanBDD', responseBody);
 
 Com isso, podemos seguir normalmente com os testes.
 
-## Criando Clientes 
 
 **Aba de testes**
 
