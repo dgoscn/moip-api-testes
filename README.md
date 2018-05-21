@@ -291,9 +291,9 @@ Vemos o *Status: 201 Created* mostrando que a criação do cartão para o client
 
 ```PASS``` Contém os 4 ultimos números do cartão - Esperamos isso, OK.
 
-```PASS``` 1. Recebe informações do cliente - Deve retornar uma resposta válida - Vemos que fora retornada, OK.
+```PASS 1``` Recebe informações do cliente - Deve retornar uma resposta válida - Vemos que fora retornada, OK.
 
-```PASS``` 3. Recebe informações do cliente - Envia um OK como resposta - Foi enviado o status, OK.
+```PASS 3``` Recebe informações do cliente - Envia um OK como resposta - Foi enviado o status, OK.
 
 Vemos por meio de testes simples, o que é retornado. Como solução ou melhoramento para os testes que passarão, não tenho nenhuma em mente, acredito que elas satisfazem o que é necessário para uma boa navegação do cliente.
 
@@ -301,15 +301,15 @@ Vemos por meio de testes simples, o que é retornado. Como solução ou melhoram
 
 ![img16](https://user-images.githubusercontent.com/8397519/40285616-dfbfab36-5c74-11e8-9b8e-39d4ef798153.png)
 
-``` FAIL ``` 2. Vemos que o 201 retorna para o usuário, logo o não retornar dele, garante que o teste falhe - OK.
+``` FAIL 2``` Vemos que o 201 retorna para o usuário, logo o não retornar dele, garante que o teste falhe - OK.
 
-``` FAIL ``` 4. Não aconteceu error por conta do servidor, logo é esperado o FAIL - OK.
+``` FAIL 4``` Não aconteceu error por conta do servidor, logo é esperado o FAIL - OK.
 
-``` FAIL ``` 5. Nesse caso de criação, como ocorreu tudo bem, não aconteceu error 4xx. Logo é esperado o FAIL - OK.
+``` FAIL 5``` Nesse caso de criação, como ocorreu tudo bem, não aconteceu error 4xx. Logo é esperado o FAIL - OK.
 
-``` FAIL ``` 6. Nada de errors 5xx. Esperado o FAIL - OK.
+``` FAIL 6``` Nada de errors 5xx. Esperado o FAIL - OK.
 
-``` FAIL ``` 7. Análogo ao FAIL 5, porém, fora retornado um 201 - OK.
+``` FAIL 7``` Análogo ao FAIL 5, porém, fora retornado um 201 - OK.
 
 ***Análises***
 
@@ -328,21 +328,45 @@ Se comparado ao *body* inicial do card, é visto que alterei dois valores no *ca
 **Checando o Passed**
 ![img20](https://user-images.githubusercontent.com/8397519/40285834-1dc3b092-5c77-11e8-8b83-88adc42b2c97.png)
 
-``` PASS``` 2. Vemos claramente que um 201 não é retornado, pois não há criação - OK.
-``` PASS``` 3. É retornado error para o usuário pois ocorre erro - OK.
+``` PASS 2``` Vemos claramente que um 201 não é retornado, pois não há criação - OK.
+``` PASS 3``` É retornado error para o usuário pois ocorre erro - OK.
 
 
 **Checando o Failed**
 
 ![img21](https://user-images.githubusercontent.com/8397519/40285876-83e10348-5c77-11e8-91b7-5a6cc71cb6a3.png)
 
-Temos os 4 primeiros *FAILEDs* deixando claro que não é criado o cartão e não retorna os campos que seriam criados se o *post* tivesse acontecido com *201 http code*.
+Temos os 4 primeiros **FAILEDs** deixando claro que não é criado o cartão e não retorna os campos que seriam criados se o **POST** tivesse acontecido com **201 HTTP Code**.
 
-Os últimos *FAILEDs* vemos que são erros esperados para um *Bad Request vindo do usuário*
+Nos últimos **FAILEDs**, vemos que são erros esperados para um *Bad Request vindo do usuário*
 
-Mais uma vez, deixo como uma possível solução, um melhor redirecionamento de quando for usado a API do Moip, para que diga ao usuário qual campo ocorreu um error, como também, aconteça a validação de campos por meio de formulários, obrigando o usuário a preencher os campos obrigatórios e não deixando passar se houver um número errado, mostrando mais uma vez qual o campo isso acontece. 
+Mais uma vez, deixo como uma possível solução, um melhor redirecionamento de quando for usado a API do Moip, para que seja mostrado ao usuário qual campo ocorreu o erro. Caso também, aconteça a validação de campos por meio de formulários, que o usuário possa preencher os campos obrigatórios não deixando passar se houver um número errado, seja pra qualquer campo. Como visto em algumas situaçes, o form fica em vermelho quando falta algum número.
 
+### Deletando Cartão de Crédito 
 
+Para a ação de deletar, optei por deixá-lo o mais simples possível, tendo em vista que a maioria dos testes padrões foram selecionado nos exemplos anteriores. 
+
+![img22](https://user-images.githubusercontent.com/8397519/40286698-0f7d4acc-5c7f-11e8-8eef-525563311be6.png)
+
+Coloquei quatro testes, três deles sendo conhecidos nosso com um adendo a ser feito sobre um e outro explicarei melhor abaixo.
+
+Você perceberá que ao executar o o método **DELETE**, se tudo ocorrer bem, o retorno do **Body** será vazio, o que pode ocasionar algum erro se você nao atentar para testes que contém o campo **json** requerido. Contudo, apenas retirei a obrigatoriedade do comando de **response** para o **HTTP 200 Code** que é o que é retornado para o **DELETE**. 
+Uma possível melhoria para os desenvolvedores, poderia ser o retorno dos campos do **cartão de crédito adicionado** nulos, para ser melhor visível o retorno como também para criar um **Css Model** para ser apresentado ao cliente. 
+
+Por fim, adicionei apenas outro método do **Postman** para me mostrar se o Cartão foi deletado com sucesso.
+
+```
+pm.test("Successful DELETE request", function () {
+    pm.expect(pm.response.code).to.be.oneOf([200]);
+});
+```
+
+Vemos o **output** dele no **Passed**. Que praticamente me retorna um "console.log" se o método de retorno foi **OK**. Bem simples, mas bastante visual. 
+
+Quanto a melhoria, mesmo fazendo um novo método de **DELETE** para o mesmo **ID** do cartão anterior, o **output** é bastante satisfatório. Mostrando **404 Not Found** e ativando o teste de 4xx :)
+
+![img26](https://user-images.githubusercontent.com/8397519/40286907-615d541c-5c80-11e8-926c-499fd4a33995.png)
+ 
 
 End with an example of getting some data out of the system or using it for a little demo
 
