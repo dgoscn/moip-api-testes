@@ -23,7 +23,7 @@ Crie sua conta sandbox moip via https://conta-sandbox.moip.com.br/
 
 ### Criando Clientes
 
-Uma vez que foram executados os passos acima, é necessário que seja compreendido o funcionamento da API. Com isso, é disponibilizado uma referência para melhor entendimento.
+Uma vez que foram executados os passos acima, é necessário que seja compreendido o funcionamento da **API**. Com isso, é disponibilizado uma referência para melhor entendimento.
 
 ```
 https://dev.moip.com.br/v2.0/reference
@@ -44,7 +44,7 @@ Body
 ```
 ![img2](https://user-images.githubusercontent.com/8397519/40283656-11299122-5c58-11e8-9ac9-27772954fe5d.png)
 
-No campo acima, estou criando um usuário simples, baseado nas mandatórias da API para testes. Isso inclui responses envolvendo json e códigos HTTP.
+No campo acima, estou criando um usuário simples, baseado nas mandatórias da **API** para testes. Isso inclui responses envolvendo **JSON** e códigos **HTTP**.
 
 *O Content-Type está setado como também o application/json para execução.*
 
@@ -58,14 +58,14 @@ Como será utilizado uma feature do Postman, o **Postman BDD**, é necessário d
 
 **Postman Behavior Driven Development (Postman BDD)**
 
-O Postman BDD permite usar a sintaxe do BDD para estruturar os testes e usar a sintaxe que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona:
+O **Postman** **BDD** permite usar a sintaxe do **BDD** para estruturar os testes e usar a sintaxe que é executada no postman de maneira que não atrapalhe a execução para os assertions. Abaixo é listado um simples comando de como funciona:
 
 ```
 it(‘should be a 200 response’, () => {
  response.should.have.status(200);                           
 });
 ```
-Checa se o response executado por um método GET, POST, DELETE, etc é a mensagem HTTP 200, Successful Request. 
+Checa se o response executado por um método **GET, POST, DELETE**, etc é a mensagem **HTTP 200**, Successful Request. 
 
 **Aplicando o BDD**
 
@@ -90,7 +90,7 @@ Nessa aba, estão listados testes para checagem do nosso método que será criad
 
 ![img5](https://user-images.githubusercontent.com/8397519/40284091-cf418b2c-5c5f-11e8-9490-8518acff0c59.png)
 
-Podemos enxergar na primeira linha, uma chamada do BDD, basta apenas copiar e colar no topo do arquivo.
+Podemos enxergar na primeira linha, uma chamada do **BDD**, basta apenas copiar e colar no topo do arquivo.
 
 *Exemplo 1*
 
@@ -103,9 +103,9 @@ describe("Checagem básica se está no formato JSON", ()=>{
   });
 });
 ```
-O exemplo que vemos acima é listado nas primeiras linhas do arquivo de teste e ele nada mais é do que uma simples checagem. Como estamos trabalhando com o formato JSON, é importante checar se o que é retornado é o que é esperado como response.
+O exemplo que vemos acima é listado nas primeiras linhas do arquivo de teste e ele nada mais é do que uma simples checagem. Como estamos trabalhando com o formato **JSON**, é importante checar se o que é retornado é o que é esperado como response.
 
-Ao criarmos um usuário, o output esperado é de um código **201 HTTP** via método **POST**. Por isso esperamos por um código 201. Esse padrão é observado para o padrão BDD.
+Ao criarmos um usuário, o output esperado é de um código **201 HTTP** via método **POST**. Por isso esperamos por um código **201**. Esse padrão é observado para o padrão **BDD**.
 
 *Exemplo 2*
 
