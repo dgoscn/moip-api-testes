@@ -81,9 +81,11 @@ postman.setGlobalVariable('postmanBDD', responseBody);
 
 Com isso, podemos seguir normalmente com os testes.
 
+##Criando Clientes 
+
 **Aba de testes**
 
-Nessa aba, estão listados testes para checagem do nosso método que será criado por meio da URL concebida pela API.
+Nessa aba, estão listados testes para checagem do nosso método que será criado por meio da **URL** concebida pela **API**.
 
 ![img5](https://user-images.githubusercontent.com/8397519/40284091-cf418b2c-5c5f-11e8-9490-8518acff0c59.png)
 
@@ -102,7 +104,7 @@ describe("Checagem básica se está no formato JSON", ()=>{
 ```
 O exemplo que vemos acima é listado nas primeiras linhas do arquivo de teste e ele nada mais é do que uma simples checagem. Como estamos trabalhando com o formato JSON, é importante checar se o que é retornado é o que é esperado como response.
 
-Ao criarmos um usuário, o output esperado é de um código **201 HTTP** via método POST. Por isso esperamos por um código 201. Esse padrão é observado para o padrão BDD.
+Ao criarmos um usuário, o output esperado é de um código **201 HTTP** via método **POST**. Por isso esperamos por um código 201. Esse padrão é observado para o padrão BDD.
 
 *Exemplo 2*
 
