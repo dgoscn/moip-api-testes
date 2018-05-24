@@ -478,7 +478,13 @@ Para os casos citados acima, um **JSON** é gerado no **Body** de testes e é de
 
 Na área de testes, é regular o uso de **schemas** para testes de **APIS**. O **Postman** por sua vez nos permite usar também esse conotação, visto que é baseado **JSON** e pode ser exportado para outras plataformas de testes, por exemplo, na a **gema** ou **gems** como prefirir , referente ao **Ruby** e **Ruby on Rails** que é usado juntamente  com o **rspec**.
 
-Como a colection para **Pedidos** é menor se comparado ao de **Criação de Clientes e Pagamentos**, usarei nessa seção a abordagem dita. Ela é bem simples, pois é herdada do **JSON** passado como campo no **body** da **API**.
+Como a colection para **Pedidos** é menor se comparado ao de **Criação de Clientes e Pagamentos**, usarei nessa seção a abordagem dita. Ela é bem simples, pois é herdada do **JSON** passado como campo no **body** da **API**. Segue a imagem abaixo:
+
+![pedidos01](https://user-images.githubusercontent.com/8397519/40458502-aa80128e-5ed2-11e8-9ed9-0e2a5e87594a.png)
+
+Essa abordagem, pode soar um pouco suja, pois não desejamos ter inúmeros **schemas JSON** na nossa suíte de testes. O **Postman** nos permite criar outro esquemas, usando **variáveis**. Porém, para exemplo, deixarei da maneira que se encontra.
+
+Como podemos ver, temos o uso de outra propriedade nos nossos testes, o **tv4**. O **tv4** nada mais é que uma bibliotaca, da qual nos permite escrever testes para e testar se a **API** responde ao nosso **schema JSON** de testes.
 
 ### Break down into end to end tests
 
