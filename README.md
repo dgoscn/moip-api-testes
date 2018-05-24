@@ -480,11 +480,51 @@ Na área de testes, é regular o uso de **schemas** para testes de **APIS**. O *
 
 Como a colection para **Pedidos** é menor se comparado ao de **Criação de Clientes e Pagamentos**, usarei nessa seção a abordagem dita. Ela é bem simples, pois é herdada do **JSON** passado como campo no **body** da **API**. Segue a imagem abaixo:
 
-![pedidos01](https://user-images.githubusercontent.com/8397519/40458502-aa80128e-5ed2-11e8-9ed9-0e2a5e87594a.png)
+![pedido01](https://user-images.githubusercontent.com/8397519/40458716-e9a7845a-5ed3-11e8-8c37-bfe11141ea5f.png)
 
 Essa abordagem, pode soar um pouco suja, pois não desejamos ter inúmeros **schemas JSON** na nossa suíte de testes. O **Postman** nos permite criar outro esquemas, usando **variáveis**. Porém, para exemplo, deixarei da maneira que se encontra.
 
 Como podemos ver, temos o uso de outra propriedade nos nossos testes, o **tv4**. O **tv4** nada mais é que uma bibliotaca, da qual nos permite escrever testes para e testar se a **API** responde ao nosso **schema JSON** de testes.
+
+O mesmo princípio de testes é feito, checando pela aparição dos campos como também criação deles no **response body** da requisição. Esse valor é salvo numa variável chamada **pedido**, e o **tv4** faz essa checagem retornando ao teste esperado! 
+
+***Observação**, vale lembrar também que a **URL** usada no método, é diferente*. 
+
+![pedidosbody](https://user-images.githubusercontent.com/8397519/40458761-294229ee-5ed4-11e8-9500-0bceab4df3e0.png)
+
+O **body JSON** passado para criação do **Pedido** na **API** é totalmente baseado no guia de referência.
+Repeti o mesmo código, tendo mudado apenas o **ID** do usuário. Logo, a verificação fora feita somente a nível não aprofundado. A tratativa é feita somente para campos com **strings** e **integers**, ficando a mercê de vulnerabilidades de **injections code**. Mas como estamos testando simples validações, para nosso caso, a abstração da camada de segurança é válida. 
+
+**Retorno do teste**
+
+![pedidovalido](https://user-images.githubusercontent.com/8397519/40458925-00b0782c-5ed5-11e8-8363-b35e9310c835.png)
+
+Por fim, vemos que para o nosso simples teste, o **HTTP Code 201** fora retornado, confirmando a criação do **Pedido** como também o **PASS** para o nosso teste.
+
+## Consultar Pedidos ##
+
+A consulta de pedidos, também é feita de maneira simples. Para a verificação, dentro do **Body** do nosso response de **Criação de Pedido**, coletamos o **ID** gerado, e fazemos a busca por ele via método **GET**. 
+
+![consultarpedidos](https://user-images.githubusercontent.com/8397519/40459078-d129920e-5ed5-11e8-9344-2f9aff7ccbf4.png)
+
+Como podemos ver, reaproveitamos nosso código de teste do exemplo anterior, e também o da checagem do **HTTP Code 200**, para checar se a existência do pedido é válida. Assim, concluímos que tanto para a criação e para consulta, temos uma resposta válida da **API**. 
+
+E para uma checagem mais geral, acerca de todos os **pedidos**, excluímos apenas o validador para determinado pedido e fazemos a busca em cima da rota raiz para padidos.
+
+![pedidosnogeral](https://user-images.githubusercontent.com/8397519/40459199-76e62a04-5ed6-11e8-96d9-4bee3264a293.png)
+
+Assim também, temos o teste simples de retorno do método GET para o orders. Sendo que por sua vez, o retorno no **body**, não tenha retornado como demonstrado na **referência da API**. Tentei encontrar algum erro na criação ou até na busca, mas não fui capaz de encontrar, tendo em vista que os pedidos estavam sendo criados normalmente e podendo ser checados unitariamente.
+
+Segue abaixo a imagem descritiva:
+
+![getemtodos](https://user-images.githubusercontent.com/8397519/40459327-25c44880-5ed7-11e8-9a60-7047f02a3498.png)
+
+Por não possuir maturidade o suficiente em testes, não pude encontrar o que fiz de errado nos processos, como justifiquei no parágrafo anterior. Mas segue a imagem em destaque, podendo acontecer de alguém ter passado o mesmo.
+
+## Pagamentos ## 
+
+
+
 
 ### Break down into end to end tests
 
