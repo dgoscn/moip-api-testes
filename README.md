@@ -476,7 +476,9 @@ Para os casos citados acima, um **JSON** é gerado no **Body** de testes e é de
 
 ## Criando Pedidos
 
-Explain how to run the automated tests for this system
+Na área de testes, é regular o uso de **schemas** para testes de **APIS**. O **Postman** por sua vez nos permite usar também esse conotação, visto que é baseado **JSON** e pode ser exportado para outras plataformas de testes, por exemplo, na a **gema** ou **gems** como prefirir , referente ao **Ruby** e **Ruby on Rails** que é usado juntamente  com o **rspec**.
+
+Como a colection para **Pedidos** é menor se comparado ao de **Criação de Clientes e Pagamentos**, usarei nessa seção a abordagem dita. Ela é bem simples, pois é herdada do **JSON** passado como campo no **body** da **API**.
 
 ### Break down into end to end tests
 
