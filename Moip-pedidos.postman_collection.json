@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "1d677c27-f9bd-4fb4-a0c4-dac67ad14166",
+		"name": "Moip-pedidos",
+		"description": "This is the part that belongs to Pedidos from API Rerefence from Moip Pagamentos.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "criandopedido",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "291dbafa-3c34-4be2-90e1-4bcaf41e76f7",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d113f0ad-71d3-4b3a-902a-5073e3522b9b",
+						"type": "text/javascript",
+						"exec": [
+							"const ordensPedidos = {",
+							"    \"required\": [\"ownId\"],",
+							"    \"amount\":{",
+							"        \"currency\":\"BRL\",",
+							"        \"subtotals\":{",
+							"            \"shipping\": \"integer\"",
+							"        }",
+							"    },",
+							"    \"items\":[  ",
+							"      {  ",
+							"         \"product\":\"string\",",
+							"         \"category\":\"string\",",
+							"         \"quantity\":\"integer\",",
+							"         \"detail\":\"string\",",
+							"         \"price\":\"integer\"",
+							"      }",
+							"   ],",
+							"   \"customer\":{  ",
+							"      \"id\":\"string\"",
+							"   }",
+							"    ",
+							"}",
+							"",
+							"var pedido = JSON.parse(responseBody);",
+							"tests[\"O Pedido é válido\"] = tv4.validate(pedido, ordensPedidos);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"ownId\":\"meu_id_order\",\n   \"amount\":{  \n      \"currency\":\"BRL\",\n      \"subtotals\":{  \n         \"shipping\":1500\n      }\n   },\n   \"items\":[  \n      {  \n         \"product\":\"Descrição do pedido\",\n         \"category\":\"CLOTHING\",\n         \"quantity\":1,\n         \"detail\":\"Camiseta estampada branca\",\n         \"price\":9500\n      }\n   ],\n   \"customer\":{  \n      \"id\": \"CUS-17P6DNLEKT3M\"\n   }\n}"
+				},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/orders",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"orders"
+					]
+				},
+				"description": "This is for the creation of an order from a client."
+			},
+			"response": []
+		},
+		{
+			"name": "consultarpedido",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a0510b00-fc9c-4898-93d6-d876f399d2f4",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "36df7a10-9f39-4251-b031-4ea8a92c2bcc",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe('Informações sobre pedidos', () => {",
+							"",
+							"  it('Informações de Pedido OK', () => {",
+							"    response.should.have.status(200);",
+							"    response.should.be.json;",
+							"    response.body.should.not.be.empty;",
+							"  });",
+							"  ",
+							"});",
+							"",
+							"const ordensPedidos = {",
+							"    \"required\": [\"ownId\"],",
+							"    \"amount\":{",
+							"        \"currency\":\"BRL\",",
+							"        \"subtotals\":{",
+							"            \"shipping\": \"integer\"",
+							"        }",
+							"    },",
+							"    \"items\":[  ",
+							"      {  ",
+							"         \"product\":\"string\",",
+							"         \"category\":\"string\",",
+							"         \"quantity\":\"integer\",",
+							"         \"detail\":\"string\",",
+							"         \"price\":\"integer\"",
+							"      }",
+							"   ],",
+							"   \"customer\":{  ",
+							"      \"id\":\"string\"",
+							"   }",
+							"    ",
+							"}",
+							"",
+							"var pedido = JSON.parse(responseBody);",
+							"tests[\"O Pedido é válido\"] = tv4.validate(pedido, ordensPedidos);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/orders/ORD-8LUEY8EKE4LW",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"orders",
+						"ORD-8LUEY8EKE4LW"
+					]
+				},
+				"description": "A simple request to get status from a order by id"
+			},
+			"response": []
+		},
+		{
+			"name": "consultarpedidos",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "46886af8-3653-413e-b95e-fdde65ad2f18",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e4628c3d-990a-48d4-916c-1e965a329872",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.postmanBDD);",
+							"",
+							"describe('Informações sobre pedidos', () => {",
+							"",
+							"  it('Informações de Pedidos OK', () => {",
+							"    response.should.have.status(200);",
+							"    response.should.be.json;",
+							"    response.body.should.not.be.empty;",
+							"  });",
+							"  ",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/orders",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"orders"
+					]
+				},
+				"description": "This is another request for all orders "
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "de157509-eca3-4907-9f3e-d564cde26b81",
+			"key": "Content-Type",
+			"value": "application/json",
+			"type": "string",
+			"description": ""
+		}
+	]
+}
