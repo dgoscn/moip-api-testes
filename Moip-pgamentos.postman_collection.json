@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "d93412e9-d538-4d1b-ab21-e51560b0b416",
+		"name": "Moip-pgamentos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "criandopagamento",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "291dbafa-3c34-4be2-90e1-4bcaf41e76f7",
+						"type": "text/javascript",
+						"exec": [
+							"if (!environment.postman_bdd_path){",
+							"    postman.setGlobalVariable('postman_bdd_path', 'http://bigstickarpet.com/postman-bdd/dist/postman-bdd.min.js');",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "48b743d3-c38e-42d2-a2ab-b237aeb7abf8",
+						"type": "text/javascript",
+						"exec": [
+							"const criacaoPagamento = {",
+							"    \"required\": [\"method\"],",
+							"    \"fundingInstrument\":{",
+							"        \"method\":\"BRL\",",
+							"        \"creditCard\":{",
+							"            \"hash\": \"integer\",",
+							"        ",
+							"      \"store\": true,",
+							"      \"holder\": {",
+							"        \"fullname\": \"string\",",
+							"        \"birthdate\": \"integer\",",
+							"        \"taxDocument\": {",
+							"          \"type\": \"CPF\",",
+							"          \"number\": \"integer\"",
+							"        },",
+							"        \"phone\": {",
+							"          \"countryCode\": \"integer\",",
+							"          \"areaCode\": \"integer\",",
+							"          \"number\": \"integer\"",
+							"        }",
+							"    }",
+							"  }",
+							" }",
+							"}",
+							"var pagamento = JSON.parse(responseBody);",
+							"tests[\"O pagamento foi criado\"] = tv4.validate(pagamento, criacaoPagamento);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"installmentCount\": 1,\n  \"statementDescriptor\": \"lojaBrega.com\",\n  \"fundingInstrument\": {\n    \"method\": \"CREDIT_CARD\",\n    \"creditCard\": {\n      \"hash\": \"CiOh5H1ctLjBpgqxRy5s4qFlX/kumZzjqsW2YL/zWethwlYh4EXbIbME9L76wvtjruKE/HF0G0fdnXhme34Xzb2UcGHsUdXX8PbiGxr3ZH3liOguHxyyjNABZcb1wLitZJMG5PqMFMVoQE2QPa+algfGYc+mDrAFgBjLLKAxCmCYek5mf56mq9mhufTi52z7X4UqPnK6/P3VkfkA+uTU55YgqAGVg7yMlX4c9KaVOifDsD9MM4WxpuWB+KMOmEKBk6wdjOwZlep2pYDvzR4dNZE5f53urXlTdS+BJamoXPdDoOJ1bgm0k2FMwsWRwQug0DBMM/4MxuFsr1Fe+D8PQQ==\",\n      \"store\": true,\n      \"holder\": {\n        \"fullname\": \"Falcão Maia\",\n        \"birthdate\": \"1960-05-10\",\n        \"taxDocument\": {\n          \"type\": \"CPF\",\n          \"number\": \"20013390024\"\n        },\n        \"phone\": {\n          \"countryCode\": \"55\",\n          \"areaCode\": \"11\",\n          \"number\": \"22226842\"\n        }\n      }\n    }\n  }\n  \n}"
+				},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/orders/ORD-8LUEY8EKE4LW/payments",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"orders",
+						"ORD-8LUEY8EKE4LW",
+						"payments"
+					]
+				},
+				"description": "This is for the creation of an order from a client."
+			},
+			"response": []
+		},
+		{
+			"name": "consultarpagamento",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/payments/payment_id",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"payments",
+						"payment_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "capturapagamentoautorizado",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/payments/payment_id/capture",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"payments",
+						"payment_id",
+						"capture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancelarprepagamento",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/v2/payments/payment_id/void",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"v2",
+						"payments",
+						"payment_id",
+						"void"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "autorizarpagamentosandbox",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://sandbox.moip.com.br/simulador/authorize?payment_id=codigo&amount=valor",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"moip",
+						"com",
+						"br"
+					],
+					"path": [
+						"simulador",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "payment_id",
+							"value": "codigo"
+						},
+						{
+							"key": "amount",
+							"value": "valor"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "UU7YSRDFSNOL87YXGSXQIFIUWHWJG3LPR4QBDPKN",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "LAZZIRC8ZNDBP9JL89YFPKEYRLLJLCRO",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a18882bb-a117-4d33-be56-821aa33b0b42",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "945cb9be-591f-4437-aa6a-0816f51ca31e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d87fa55f-7150-48b3-afd6-8676f6ff38f7",
+			"key": "Content-Type",
+			"value": "application/json",
+			"type": "string",
+			"description": ""
+		}
+	]
+}
