@@ -523,16 +523,17 @@ Por não possuir maturidade o suficiente em testes, não pude encontrar o que fi
 
 ## Pagamentos ## 
 
+Referente ao **pagamento** necessitamos do identificador do nosso pedido. Com ele em mãos, podemos via método **POST** adicionar o cartão de crédito para o pagamento. É indispensável também, o uso do **hash** do cartão gerado pelo **Moip.js**.
+
+Tendo em vista alguns problemas, não consegui dar continuidade nessa fase da do teste.
+
+Obtive alguns erros na checagem do hash do cartão, tentei algumas outras alternativas, porém não alcançei sucesso.
+
+Um exemplo, é que mesmo aderindo ao modelo oferecido pela **API** e a criação do pagamento com o uso de um **novos hashes** gerados pelo **Moip.js**, o método **POST** sempre retornava o erro de não conseguir fazer a checagem.
+
+Sou grato a toda equipe pela documentação da **API**. Achei muito clara e bastante satisfatória. Se comparado a algumas que conheci, essa é uma das mais bem escritas. Parabéns a todos os envolvidos.
 
 
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
